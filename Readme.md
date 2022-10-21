@@ -15,6 +15,9 @@ I developed this project as part of a mini-project competition at my college.
 ## Overview
 Algo-Sorter is a website application that allows users to select sorting algorithms and visualize the process to understand the algorithm sorting procedure. Dynamic features are embedded within the application, enabling users to customize options to view the sorting process intuitively. It features six algorithms with a play-pause sorting effect built with react and setTimeout hooks.
 
+## Snapshot
+![snapshot](/Screenshot (50).png)
+
 ## Instructions to run the project
 1. Clone/Download the repository.
 2. Open the folder in any of the code editors. (Ensure react is installed in your system)
