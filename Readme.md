@@ -2,7 +2,7 @@
 
 ## Project Description
 #### Context
-Just a personal exploration with ReactJS.
+Exploration with ReactJS.
 
 #### Duration
 2 days
