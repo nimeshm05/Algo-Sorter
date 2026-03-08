@@ -2,7 +2,7 @@
 
 ## Project Description
 #### Context
-I developed this project as part of a mini-project competition at my college.
+Just a personal exploration with ReactJS.
 
 #### Duration
 2 days
