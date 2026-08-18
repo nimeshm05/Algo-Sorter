@@ -1,0 +1,36 @@
+# Use Environment Variables for Runtime Database Configuration: Database Connection Strings
+
+These rules are ALWAYS ACTIVE for all TypeScript and JavaScript source files in the application that configure database connections or server ports.
+
+### Rules
+
+- **R-DBCONFIG-001** MUST: Database connection strings MUST be sourced from the DATABASE_URL environment variable using process.env.DATABASE_URL
+- **R-DBCONFIG-002** MUST: Server port configuration MUST be sourced from the PORT environment variable using process.env.PORT
+- **R-DBCONFIG-003** MUST: No hardcoded PostgreSQL connection strings containing credentials shall appear in TypeScript or JavaScript source files
+- **R-DBCONFIG-004** SHOULD: Implement startup validation that checks for required environment variables and provides clear error messages indicating which variables are missing
+- **R-DBCONFIG-005** SHOULD: Use a .env file with dotenv library for local development to avoid manually setting environment variables in each shell session
+- **R-DBCONFIG-006** SHOULD: Document all required environment variables in README.md with example values using placeholder credentials, not real ones
+- **R-DBCONFIG-007** SHOULD: Consider using a configuration validation library like joi or zod to validate environment variables at startup with clear error messages
+
+### Verify
+
+```bash
+# Check for DATABASE_URL environment variable usage
+grep -r 'process\.env\.DATABASE_URL' server/src/ | grep -v 'node_modules'
+
+# Check for PORT environment variable usage
+grep -r 'process\.env\.PORT' server/src/ | grep -v 'node_modules'
+
+# Verify no hardcoded PostgreSQL connection strings with credentials exist
+grep -rE '(postgresql://|postgres://).*@.*:.*/' server/src/ --include='*.ts' --include='*.js' | grep -v process.env || echo 'No hardcoded connection strings found'
+```
+
+**Accept when:**
+- All database connection strings are sourced from process.env.DATABASE_URL with no hardcoded credentials in source files
+- Server port configuration is sourced from process.env.PORT
+- No grep matches for hardcoded PostgreSQL connection strings containing credentials in TypeScript or JavaScript source files
+- Environment variable usage is consistent across all database initialization code
+
+<enforcement>
+Claude Code MUST NOT skip or defer verification. All three verification commands must execute successfully before accepting changes to database configuration code.
+</enforcement>
